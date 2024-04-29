@@ -1,6 +1,0 @@
-projectKey=php:website
-serverUrl=http://sonar.fiap.com.br
-serverVersion=8.9.0.43852
-dashboardUrl=http://sonar.fiap.com.br/dashboard?id=php%3Awebsite
-ceTaskId=AY6_cnC0htcFQdJLWiL2
-ceTaskUrl=http://sonar.fiap.com.br/api/ce/task?id=AY6_cnC0htcFQdJLWiL2
