@@ -1,0 +1,33 @@
+{% extends "base.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function validarPost(){
+            // verifica se o recapcha é diferente de ""
+            if(grecaptcha.getResponse() != "") return true;
+
+            // erro: não selecionado
+            else {
+                alert("Selecione a caixa de 'Não sou um robô'");
+                return false;
+            }
+        }
+    </script>
+{% endblock %}
+{% block divbody %}
+        <form method="post" onsubmit="return validarPost()">
+            <a class="user_senha" href="{{ url_base }}logar.php"><h2 class="content">← VOLTAR AO INICIO</h2></a>
+            <h2 class="FIAP"> ESQUECI MINHA SENHA </h2>
+            <p >Para alunos(as) da Graduação ON, MBA ON, Corporate aTip ou do programa Eu Capacito, do Movimento Brasil Digital.</p>
+            <p >Digite seu email e receba seu link para resetar sua senha</p>
+            <h4 class="user_esqueci">EMAIL</h4>
+            <input type="text" name="email" value={{ nomesalvo }}><br>
+
+            <div class="g-recaptcha" data-sitekey="6LdqoaEpAAAAAH0OVsjw1Ir-YpWnIYfuK5bleeRC"></div><br>
+
+            <input type="submit" id="submit" name="submit" value="Enviar"><br>
+        </form>
+{% endblock %}
+

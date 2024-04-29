@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block form %}
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <h1 class="FIAP"> LOGIN </h1>
+    <h4 class="user_senha">Username:</h4>
+    <input type="text" name="name" value={{ nomesalvo }}><br>
+    <h4 class="user_senha">Senha:</h4>
+    <input type="password" name="password"><br>
+    <input type="submit" name="submit" value="Logar"><br>
+    {{ parent() }}
+{% endblock %}
+
+{% block relo %}
+    Caso você não fez seu registro ainda, <a href="{{url_base}}registrar.php"> clique aqui</a>!
+    {{ parent() }}
+    <br> <a class="esqueci_senha" href="{{ url_base }}esqueci_senha.php">Esqueci minha senha</a>
+{% endblock %}

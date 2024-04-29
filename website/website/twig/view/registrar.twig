@@ -1,0 +1,36 @@
+{% extends "base.twig" %}
+
+{% block head %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function validarPost(){
+            // verifica se o recapcha é diferente de ""
+            if(grecaptcha.getResponse() != "") return true;
+
+            // erro: não selecionado
+            alert("Selecione a caixa de 'Não sou um robô'");
+            return false;
+        }
+    </script>
+{% endblock %}
+{% block divbody %}
+    <h1 class="FIAP">REGISTRAR</h1>
+    <!-- Email -->
+    <form method="post" onsubmit="return validarPost()">
+        <h4 class="user_senha">Email:</h4>
+        <input type="text" name="email"><br>
+
+        <h4 class="user_senha">Username:</h4>
+        <input type="text" name="name" value={{ nomesalvo }}><br>
+        <h4 class="user_senha">Senha:</h4>
+        <input type="password" name="password"><br>
+        <div class="g-recaptcha" data-sitekey="6LdqoaEpAAAAAH0OVsjw1Ir-YpWnIYfuK5bleeRC"></div><br>
+        <input type="submit" id="submit" name="submit" value="Registrar"><br>
+        {{ parent() }}
+    </form>
+{% endblock %}
+
+{% block relo %}
+    Caso você já tenha seu login, <a href="{{ url_base }}logar.php"> clique aqui</a>!
+    {{ parent() }}
+{% endblock %}

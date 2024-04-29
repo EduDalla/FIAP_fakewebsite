@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+    {% block head %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.fiap.com.br/wp-content/themes/fiap2016/images/favicon.ico">
+
+    <title>FIAP ON</title>
+</head>
+<body class="centralizar body_fiapon" >
+    <div class="content">
+        <div class="raleway">FIAP ON</div>
+        {% block divbody %}
+        {% if not_permitted %}
+            <h1>{{ not_permitted }}</h1>
+        {% else %}
+            <h1 class="FIAP">ADMIN MASTER - {{ _SESSION }} </h1>
+            <h1> LET'S ROCK THE FUTURE!</h1>
+            <div class="input-holder" style=" display: flex; width: 100%; justify-content: center;">
+                <form method="get">
+                    <div class="search">
+                        <input type="hidden" name="pagina" value="1">
+                        <input name="search" type="text" placeholder="Search..." value="{{ sanitized_search }}">
+                    </div>
+                </form>
+            </div>
+            <h1> {{ sem_resultado }}</h1>
+            <div class="container">
+                    {% for user in usuarios_on %}
+                <table>
+                    <form class="table" onsubmit="return confirm('Voce tem certeza?')" id="delete" method="POST" action="deletar_user.php?page={{ pagina }}">
+                        <tr>
+                            <th><input type="hidden" name="id" value="{{ user['id'] }}" /></tr> <!-- input que não mostra para o usuário, porém instancia dentro do form(do button)
+                             o que eu quero ele faça internamente(muio bom para usar em variáveis do back -->
+                        <td><h3 class="userid">{{ user['user'] }} - {{ user['id'] }} </h3></td>
+                        <td><input class="deletar_usu" type="submit" class="deletar" value="Deletar Usuário"></td>
+                        </tr>
+                    </form>
+                </table>
+
+                    {% endfor %}
+            </div>
+            <div class="paginacao">
+                <h4>
+                    {% if pagina > 1 %}
+                        <a class="pag_a" href="?pagina=1&search={{ sanitized_search }}">Primeira</a>
+                        <a class="pag_a" href="?pagina={{ pagina - 1 }}&search={{ sanitized_search }}"><<<</a>
+                    {% endif %}
+
+                    <!-- Para trás -->
+
+                    {% if pagina != 1 and pagina != 2 or (pagina - 1) > paginas %}
+                        <a class="pag_a" href="?pagina={{ pagina - 2 }}&search={{ sanitized_search }}"> {{ pagina - 2 }} </a>
+                        <a class="pag_a" href="?pagina={{ pagina - 1 }}&search={{ sanitized_search }}">{{ pagina - 1 }}</a>
+                    {% endif %}
+                    {% if pagina == 2 %}
+                        <a class="pag_a" href="?pagina={{ pagina - 1 }}&search={{ sanitized_search }}"> {{ pagina - 1 }} </a>
+                    {% endif %}
+
+                    <!-- Para frente -->
+
+                    <a class="pag_a" STYLE="background-color: rgb(255 255 255 / 13%)" href="?pagina={{ pagina }}&search={{ sanitized_search }}">{{ pagina  }}</a>
+
+                    {% if pagina < paginas %}
+                        <a class="pag_a" href="?pagina={{ pagina + 1 }}&search={{ sanitized_search }}">{{ pagina + 1 }}</a>
+                    {% endif %}
+                    {% if (pagina + 1) < paginas %}
+                        <a class="pag_a" href="?pagina={{ pagina + 2 }}&search={{ sanitized_search }}"> {{ pagina + 2 }} </a>
+                    {% endif %}
+
+
+
+                    {% if pagina < paginas %}
+                        <a class="pag_a" href="?pagina={{ pagina + 1 }}&search={{ sanitized_search }}">>>></a>
+                        <a class="pag_a" href="?pagina={{ paginas }}&search={{ sanitized_search }}">Última</a>
+                    {% endif %}
+                </h4>
+            </div>
+
+            <form class="deslogar" action="deslogar.php" method="POST"> <input type="submit" value="Deslogar" /></form>
+        {% endif %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+

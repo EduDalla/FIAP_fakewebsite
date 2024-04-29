@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block form %}
+        {% if not_permitted %}
+            <h1>Você não tem acesso a esse site! Primeiro, peça a chave de reset de senha <a href="{{ url_base }}esqueci_senha.php">aqui</a></h1>
+        {% else %}
+            <form method="post">
+                <h2 class="FIAP"> RESETAR SENHA </h2>
+                <p >Digite seu email e receba seu link para resetar sua senha</p>
+                <h4 class="user_esqueci">Digite sua nova senha</h4>
+                <input type="password" name="senha" ><br>
+                <input aria-hidden="false" type="hidden" name="chave" value="{{ chave }}">
+                <input type="submit" name="submit" value="Mudar senha"><br>
+            </form>
+        {% endif %}
+{% endblock %}
