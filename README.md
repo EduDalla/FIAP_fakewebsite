@@ -4,6 +4,7 @@
     <ul>
         <li>Baixe o <a href="https://www.apachefriends.org/download.html">XAMPP</a>;</li>
         <li>Baixe o <a href="https://twig.symfony.com/doc/3.x/installation.html">Twig</a>;</li>
+        <li>Baixe o <a href="https://github.com/mailhog/MailHog">MailHog</a>;</li>
         <li>Crie uma chave no <a href="https://www.google.com/recaptcha/admin/site/698458474/setup">reCAPTCHA</a> para validar e coloque ela no config como $secret;</li>
     </ul>
     <h3>Tabelas:</h3>
